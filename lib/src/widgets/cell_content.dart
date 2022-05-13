@@ -24,6 +24,8 @@ class CellContent extends StatelessWidget {
   final CalendarStyle calendarStyle;
   final CalendarBuilders calendarBuilders;
 
+  final bool forceTwoDigit;
+
   const CellContent({
     Key? key,
     required this.day,
@@ -40,6 +42,7 @@ class CellContent extends StatelessWidget {
     required this.isDisabled,
     required this.isHoliday,
     required this.isWeekend,
+    required this.forceTwoDigit,
     this.locale,
   }) : super(key: key);
 
@@ -60,11 +63,14 @@ class CellContent extends StatelessWidget {
       );
     }
 
-    final text = '${day.day}';
+    late final String text;
+
+    text = forceTwoDigit ? '${day.day}'.padLeft(2, "0") : '${day.day}';
+
     final margin = calendarStyle.cellMargin;
     final padding = calendarStyle.cellPadding;
     final alignment = calendarStyle.cellAlignment;
-    final duration = const Duration(milliseconds: 250);
+    const duration = Duration(milliseconds: 250);
 
     if (isDisabled) {
       cell = calendarBuilders.disabledBuilder?.call(context, day, focusedDay) ??

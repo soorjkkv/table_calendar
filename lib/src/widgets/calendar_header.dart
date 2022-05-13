@@ -49,13 +49,7 @@ class CalendarHeader extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          if (headerStyle.leftChevronVisible)
-            CustomIconButton(
-              icon: headerStyle.leftChevronIcon,
-              onTap: onLeftChevronTap,
-              margin: headerStyle.leftChevronMargin,
-              padding: headerStyle.leftChevronPadding,
-            ),
+          const SizedBox(width: 12.0,),
           Expanded(
             child: headerTitleBuilder?.call(context, focusedMonth) ??
                 GestureDetector(
@@ -83,6 +77,13 @@ class CalendarHeader extends StatelessWidget {
                 textStyle: headerStyle.formatButtonTextStyle,
                 showsNextFormat: headerStyle.formatButtonShowsNext,
               ),
+            ),
+            if (headerStyle.leftChevronVisible)
+            CustomIconButton(
+              icon: headerStyle.leftChevronIcon,
+              onTap: onLeftChevronTap,
+              margin: headerStyle.leftChevronMargin,
+              padding: headerStyle.leftChevronPadding,
             ),
           if (headerStyle.rightChevronVisible)
             CustomIconButton(

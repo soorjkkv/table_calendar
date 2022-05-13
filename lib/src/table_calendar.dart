@@ -35,6 +35,9 @@ class TableCalendar<T> extends StatefulWidget {
   /// If nothing is provided, a default locale will be used.
   final dynamic locale;
 
+  //Force to display two digit day
+  final bool forceTwoDigit;
+
   /// The start of the selected day range.
   final DateTime? rangeStartDay;
 
@@ -256,6 +259,7 @@ class TableCalendar<T> extends StatefulWidget {
     this.onPageChanged,
     this.onFormatChanged,
     this.onCalendarCreated,
+    this.forceTwoDigit = false,
   })  : assert(availableCalendarFormats.keys.contains(calendarFormat)),
         assert(availableCalendarFormats.length <= CalendarFormat.values.length),
         assert(weekendDays.isNotEmpty
@@ -611,6 +615,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           isWeekend: isWeekend,
           isHoliday: widget.holidayPredicate?.call(day) ?? false,
           locale: widget.locale,
+          forceTwoDigit: widget.forceTwoDigit,
         );
 
         children.add(content);
